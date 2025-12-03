@@ -15,7 +15,6 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('input-age', function () {
-    $user = $user->password;
     return 'ini halaman input umur';
 });
 
