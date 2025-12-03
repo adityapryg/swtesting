@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Ambil kode yang berubah
+STAGED_CHANGED_FILE = $(git diff --cached --name-only --diff-filtar=ACM | grep -E '\.php$')
+
+if [ -n "$STAGED_CHANGED_FILE"]; then
+    echo "Running the PHP Stan"
+    echo "$STAGED_CHANGED_FILE" | xargs ./vendor/bin/phpstan analyse --memory-limit=2G
+    if [ $? -ne 0 ]; then
+        echo "PHPStan found error"
+        exit 1
+    fi
+fi
